@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ApiResponseTemplate, PoiDataTemplate } from './responseTemplate.js'
+import { ApiResponseTemplate } from './responseTemplate.js'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -26,30 +26,43 @@ const requestWrapper = async (url) => {
   }
 }
 
-/**
- * 根据名称搜索 POI
- */
-export const getPoiByName = async (name) => {
-  return requestWrapper(`${API_BASE_URL}/poi/search/name/${name}`)
+// Sites
+export const getPoiById = async (id) => {
+  return requestWrapper(`${API_BASE_URL}/sites/${id}`);
 }
 
-/**
- * 根据省份搜索 POI
- */
+export const getAllPoiWithPhotos = async () => {
+  return requestWrapper(`${API_BASE_URL}/sites/with-photos`);
+}
+
+export const getAllPoiNoPhotos = async () => {
+  return requestWrapper(`${API_BASE_URL}/sites/no-photos`);
+}
+
+// Search
+export const searchByKeyword = async (keyword) => {
+  return requestWrapper(`${API_BASE_URL}/search?q=${encodeURIComponent(keyword)}`);
+}
+
+// Province
+export const getPoiByProvinceWithPhotos = async (province) => {
+  return requestWrapper(`${API_BASE_URL}/province/${province}/with-photos`);
+}
+
+export const getPoiByProvinceNoPhotos = async (province) => {
+  return requestWrapper(`${API_BASE_URL}/province/${province}/no-photos`);
+}
+
 export const getPoiByProvince = async (province) => {
-  return requestWrapper(`${API_BASE_URL}/provinces?names=${provinces.join(',')}`)
+  return requestWrapper(`${API_BASE_URL}/province/${province}`)
 }
 
-/**
- * 根据边界范围搜索 POI
- */
-export const getPoiByCoords = async (bounds) => {
-  return requestWrapper(`${API_BASE_URL}/poi/search/coords?bounds=${JSON.stringify(bounds)}`)
+// Geo Box
+export const getPoiByBbox = async (lng1, lat1, lng2, lat2) => {
+  return requestWrapper(`${API_BASE_URL}/bbox?lng1=${lng1}&lat1=${lat1}&lng2=${lng2}&lat2=${lat2}`);
 }
 
-/**
- * 根据中心点和半径搜索 POI
- */
-export const getPoiByRadius = async (center, radius) => {
-  return requestWrapper(`${API_BASE_URL}/poi/search/radius?center=${JSON.stringify(center)}&radius=${radius}`)
+// Geo Radius
+export const getPoiByNearby = async (lng, lat, radius) => {
+  return requestWrapper(`${API_BASE_URL}/nearby?lng=${lng}&lat=${lat}&radius=${radius}`);
 }
