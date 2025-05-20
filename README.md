@@ -4,7 +4,7 @@
 
 这是空间智能计算与服务课程实习项目的前端部分，基于 Vue 3 + Vite + AMap 实现了地图上的 POI（兴趣点）搜索功能，包括名称搜索、省份筛选、矩形区域和圆形区域范围搜索等核心功能。
 
-数据库以及API的获取见WebPOI_backend_SICISP后端项目。
+数据库以及API的获取见[WebPOI_backend_SICISP](https://github.com/AaronChou313/WebPOI_backend_SICISP)后端项目。
 
 ## 📸 功能演示
 
